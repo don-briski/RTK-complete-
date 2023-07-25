@@ -2,11 +2,16 @@
 
 import React, {useState} from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks"; 
+import { addCart } from "../store/slice/cart";
 import { addProduct } from "../store/slice/product";
 
 const ProductList = () => {
+
+    const cart = useAppSelector((state) => state.cartArray)
   const products = useAppSelector((state) => state.productArray);
     const dispatch = useAppDispatch()
+
+   // console.log(cart, 'cart')
 
   const [name, setName] = useState("")
     const [category, setCategory] = useState("")
@@ -54,7 +59,8 @@ const ProductList = () => {
               <h1>name: {items.name}</h1>
               <p>category: {items.category}</p>
               <p>quantity: {items.qty}</p>
-              <button> Add cart</button>
+              <button onClick={() => dispatch(addCart({name:items.name, category: items.category, qty: items.qty}))}
+              className='text-white bg-black/70 p-3 mt-3 rounded-sm'> Add cart</button>
             </div>
           );
         })}
