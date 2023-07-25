@@ -12,7 +12,11 @@ export const postApi = createApi({
 //endpoint to get all user
         getAllPost: builder.query({
             query: () => `users`,
-            providesTags: ["hello"]
+            providesTags: ["hello"],
+            transformResponse: (res:any, meta, arg) => {
+                if(arg) return res.find((val:any) => val.username == arg);
+                return  res;
+            },
         }),
 
 

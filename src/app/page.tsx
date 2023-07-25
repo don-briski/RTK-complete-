@@ -15,7 +15,7 @@ export default function Home() {
   const [updatePost, updateResult] = useUpdatePostMutation();
   const [deletePost, deleteResult] = useDeletePostMutation();
 
-  const data: any = useGetAllPostQuery("");
+  const data: any = useGetAllPostQuery("bret");
 
   const singleData:any = useGetPostByIdQuery(6);
 
