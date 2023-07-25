@@ -5,13 +5,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const postApi = createApi({
     reducerPath: "postApi",
+    tagTypes: ["hello"],
     baseQuery: fetchBaseQuery({baseUrl: "https://jsonplaceholder.typicode.com/" }),
     endpoints: (builder) => ({
+
 //endpoint to get all user
         getAllPost: builder.query({
-            query: () => `users`
+            query: () => `users`,
+            providesTags: ["hello"]
         }),
 
+
+        //get single user by id 
         getPostById: builder.query({
             query: (id) => `users/${id}`
         }),
@@ -22,7 +27,8 @@ export const postApi = createApi({
             query:() => ({
                 url: `users`,
                 method: "GET",
-            })
+            }),
+            invalidatesTags:["hello"]
         }),
 
         //this is  method to perform a Post request using mutation with RTK Query
@@ -31,7 +37,8 @@ export const postApi = createApi({
                 url: `users`,
                 method: "POST",
                 body: data
-            })
+            }),
+            invalidatesTags:["hello"]
         }),
 
         //this is  method to perform a Put(update) request using mutation with RTK Query
@@ -40,7 +47,8 @@ export const postApi = createApi({
                 url: `users/${data.id}`,
                 method: "PATCH",
                 body: data
-            })
+            }),
+            invalidatesTags:["hello"]
         }),
 
            //this is  method to perform a delete request using mutation with RTK Query
